@@ -4,7 +4,7 @@ from sqlalchemy import create_engine, orm
 from datetime import date
 
 from .const import API_URL
-from .models import VantaaOpenApplications
+from .models import VantaaOpenApplications, Base
 
 
 class SimpleExtractor:
@@ -62,6 +62,8 @@ class SimpleLoader:
     def __init__(self, conn_str: str):
         # Setup Engine
         self.engine = create_engine(conn_str)
+        # Create tables if they don't exist
+        Base.metadata.create_all(self.engine)
 
     def load(self, df: pd.DataFrame) -> pd.DataFrame:
         # Load data into database inside session

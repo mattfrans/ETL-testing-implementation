@@ -255,6 +255,115 @@ These additional tests will help ensure:
 
 The tests should be implemented in order of priority based on business impact and likelihood of issues.
 
+## Performance Testing
+
+The ETL pipeline includes performance tests to ensure efficient processing of job listing data. These tests monitor:
+- Execution time of each pipeline component
+- Memory usage during processing
+- Batch processing capabilities
+
+### Performance Metrics
+- Data extraction: < 5 seconds, < 100MB memory
+- Data transformation: < 2 seconds, < 50MB memory
+- Full pipeline: < 10 seconds, < 200MB memory
+- Batch processing (3x data): < 6 seconds, < 150MB memory
+
+### Test Implementation
+- Uses `psutil` for memory monitoring
+- Measures both time and memory usage
+- Tests individual components and full pipeline
+- Includes batch processing scenarios
+
+### Performance Considerations
+- Memory usage is monitored to prevent resource exhaustion
+- Batch processing tests ensure scalability
+- Time limits are set based on reasonable expectations for the data volume
+
+## Performance Testing Analysis
+
+### Current Pipeline Characteristics
+1. **Small Data Volume**
+   - The pipeline processes job listings from a single city
+   - Data volume is relatively small (typically < 100 records)
+   - Low frequency of updates (job listings don't change rapidly)
+
+2. **Simple Operations**
+   - Basic data transformation (renaming columns, date conversion)
+   - No complex computations or aggregations
+   - Single-table database operations
+
+3. **Infrastructure**
+   - SQLite database (file-based, single user)
+   - In-memory testing database
+   - No concurrent write operations in production
+
+### Performance Testing Considerations
+
+#### 1. Is Performance Testing Necessary?
+For this specific pipeline, comprehensive performance testing may not be the best use of testing resources because:
+
+a) **Low Business Impact**
+   - Job listings are not time-critical
+   - Small data volume means processing time is inherently short
+   - No real-time requirements specified
+
+b) **Simple Architecture**
+   - Single-threaded operations
+   - No complex data transformations
+   - No distributed components
+
+c) **Resource Usage**
+   - Minimal memory footprint
+   - Light CPU usage
+   - No significant I/O operations
+
+#### 2. What Should We Test Instead?
+
+Priority should be given to:
+
+1. **Data Quality Tests**
+   - Validate data types and formats
+   - Check for missing or malformed data
+   - Ensure data consistency
+
+2. **Integration Tests**
+   - API endpoint reliability
+   - Database operations correctness
+   - End-to-end workflow validation
+
+3. **Error Handling**
+   - API failure scenarios
+   - Database connection issues
+   - Malformed data handling
+
+4. **Functional Tests**
+   - Column mapping accuracy
+   - Date transformation correctness
+   - Data persistence verification
+
+### Recommendations
+
+1. **Focus Areas**
+   - Implement comprehensive data validation
+   - Add robust error handling tests
+   - Enhance integration test coverage
+
+2. **Skip or Minimize**
+   - Complex performance benchmarks
+   - Stress testing
+   - Load testing
+   - Concurrent operation testing
+
+3. **Monitor Instead**
+   - Add basic logging
+   - Track execution time for troubleshooting
+   - Monitor for unexpected slowdowns
+
+### Conclusion
+Given the nature of this ETL pipeline (small data volume, simple operations, non-critical timing), extensive performance testing would be overengineering. Resources would be better spent on ensuring data quality, reliability, and proper error handling.
+
+If the pipeline's requirements change (e.g., higher data volume, real-time processing needs, or multiple concurrent users), we can revisit the need for performance testing at that time.
+
 ## Recommended Additional Tests
 
 ### 1. Data Quality Tests
