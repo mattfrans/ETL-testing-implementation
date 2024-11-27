@@ -55,7 +55,7 @@ class TestEnvironmentReset:
         """Test successful environment reset"""
         # Create a test file
         test_file = tmp_path / "test.db"
-        test_file.write_text("test content")
+        test_file.touch()
         
         # Verify file exists
         assert os.path.exists(test_file)

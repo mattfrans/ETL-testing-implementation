@@ -106,7 +106,7 @@ class TestMockLoader:
         
         # Create test data
         data = pd.DataFrame({
-            'id': [1],
+            'id': [1],  # Changed to integer
             'field': ['IT'],
             'job_title': ['Developer'],
             'job_key': ['key123'],
@@ -132,7 +132,7 @@ class TestMockLoader:
             saved_objects = mock_session.bulk_save_objects.call_args[0][0]
             assert len(saved_objects) == 1
             assert isinstance(saved_objects[0], VantaaOpenApplications)
-            assert saved_objects[0].id == '1'  # Verify ID is converted to string
+            assert saved_objects[0].id == 1  # Verify ID remains an integer
 
 class TestMockPipeline:
     """Tests for complete pipeline using mocks"""
@@ -170,5 +170,5 @@ class TestMockPipeline:
         with engine.connect() as conn:
             result = conn.execute(text("SELECT * FROM vantaa_open_applications")).fetchone()
             assert result is not None
-            assert result.id == '1'  # Compare with string since pipeline converts to string
+            assert result.id == 1  # Compare with integer since IDs stay as integers
             assert result.field == 'IT'

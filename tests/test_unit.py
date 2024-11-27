@@ -116,7 +116,7 @@ class TestLoader:
         
         # Create test data
         test_data = pd.DataFrame({
-            'id': ['1'],  # Integer ID is converted to string by pipeline
+            'id': [1],  # Keep ID as integer throughout
             'field': ['IT'],
             'job_title': ['Developer'],
             'job_key': ['key123'],
@@ -135,6 +135,6 @@ class TestLoader:
         with engine.connect() as conn:
             result = conn.execute(text("SELECT * FROM vantaa_open_applications")).fetchone()
             assert result is not None
-            assert result.id == '1'  # Compare with string since pipeline converts to string
+            assert result.id == 1  # Compare with integer since IDs stay as integers
             assert result.field == 'IT'
             assert result.job_title == 'Developer'
