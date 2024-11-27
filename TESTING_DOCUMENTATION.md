@@ -16,7 +16,7 @@ However, if we were to modify the pipeline, we would consider the following impr
 - Include data quality checks in the Transformer
 - Add error handling for database connection issues in the Loader
 
-Our focus was on implementing a thorough testing strategy that matches the simplicity and purpose of the pipeline.
+The focus was on implementing a thorough testing strategy that matches the simplicity and purpose of the pipeline.
 
 ## Test Suite Structure
 Total Tests: 40 tests across 7 test files
