@@ -1,3 +1,17 @@
+# My submission for the following task:
+
+Documentation of the tests aswell as instructions for how to run the program can be found in TESTING_DOCUMENTATION.md. 
+
+Instructions for running with docker:
+
+```bash
+Build the Docker image
+docker build . -t etl-tests
+
+Run all tests in container
+docker run --rm -v $(pwd):/etl etl-tests pytest tests/ -v
+```
+
 # Preliminary Task: Junior Test Engineer
 
 Thank you for applying and showing interest for the position in the Junior Test Engineer at Reagle!
