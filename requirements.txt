@@ -2,9 +2,5 @@ sqlalchemy
 pandas
 requests
 pytest
-psutil
-python-dateutil
 pytest-cov
 requests-mock
-pytest-benchmark
-memory-profiler

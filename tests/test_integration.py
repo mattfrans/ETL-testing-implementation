@@ -13,7 +13,7 @@ from pipeline.const import TABLE_NAME
 @pytest.fixture
 def mock_api_response():
     return [{
-        'id': '1',
+        'id': 1,
         'ammattiala': 'IT',
         'tyotehtava': 'Python Developer',
         'tyoavain': 'key123',
@@ -23,7 +23,7 @@ def mock_api_response():
         'y': '60.123',
         'linkki': 'http://test.com'
     }, {
-        'id': '2',
+        'id': 2,
         'ammattiala': 'Healthcare',
         'tyotehtava': 'Nurse',
         'tyoavain': 'key456',
